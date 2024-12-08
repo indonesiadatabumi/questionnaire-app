@@ -1,0 +1,73 @@
+/* Layout Container */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full height of the viewport */
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Header Styling */
+.header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Menu Container */
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Card Grid for Dashboard Menu */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Auto-adjust columns based on screen width */
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px; /* Max width for the menu grid */
+}
+
+/* Individual Card for Each Menu Item */
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Navigation Button */
+.card-link {
+  text-decoration: none;
+}
+
+/* Content area for nested routes */
+.content {
+  width: 100%;
+  padding-top: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}

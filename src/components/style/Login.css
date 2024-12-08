@@ -1,0 +1,228 @@
+/* Login Container */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f7f7f7; /* Light gray background */
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Login Form */
+  .login-form {
+    background: #ffffff; /* White card background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Form Title */
+  .login-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Group */
+  .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  /* Input Fields */
+  .login-input {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+    color: #333333;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .login-input:focus {
+    border-color: #007bff; /* Blue border on focus */
+  }
+  
+  /* Login Button */
+  .login-button {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #007bff; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .login-button:hover {
+    background: #0056b3; /* Darker blue on hover */
+  }
+  
+
+  /* Container for the page */
+.results-container, .mbti-manage-container, .questionnaire-screen-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    max-width: 1200px; /* Set maximum width for desktop */
+    width: 100%; /* Ensure it takes up full width up to the max-width */
+  }
+  
+  /* Title for the results page */
+  .results-title, .manage-title, .questionnaire-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Section title */
+  .section-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  /* List of results */
+  .results-list, .question-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input for searching */
+  .search-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 60%;
+    margin-top: 10px;
+    box-sizing: border-box;
+  }
+  
+  .search-input:focus {
+    border-color: #007bff;
+  }
+  
+  /* Card container */
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Result card */
+  .result-card, .question-card, .questionnaire-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .result-card:hover, .question-card:hover, .questionnaire-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  /* Buttons */
+  .submit-btn, .pagination-btn, .start-btn, .edit-btn, .delete-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover, .pagination-btn:hover, .start-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Pagination controls */
+  .pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-info {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Form inputs */
+  .input-field, .select-field, .text-input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .submit-btn {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design for Mobile */
+  @media (max-width: 768px) {
+    .pagination-controls {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .pagination-btn {
+      margin-top: 10px;
+    }
+  
+    .search-input {
+      width: 80%;
+    }
+  
+    .card-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
