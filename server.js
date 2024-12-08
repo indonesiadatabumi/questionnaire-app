@@ -1,8 +1,17 @@
 const express = require("express");
 const path = require("path");
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 20605;
+
+const corsOptions = {
+  origin: 'http://localhost:3000', // Allow requests from localhost
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "build")));
