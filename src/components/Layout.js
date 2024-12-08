@@ -13,6 +13,7 @@ const Layout = () => {
 
     const memberOptions = [
         { label: "Take MBTI Test", path: "/mbti" },
+        { label: "Take Questionnaire", path: "/questionnairesScreen" },
         { label: "View Your Results", path: "/results" },
     ];
 
