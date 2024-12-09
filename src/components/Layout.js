@@ -1,6 +1,6 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom"; // Use Outlet for nested routes
-import "./style/Layout.css"; // Assuming you have a separate CSS file for layout styling
+import { Outlet, Link } from "react-router-dom";
+import "./style/Layout.css"; // Custom styles
 
 const Layout = () => {
     const role = localStorage.getItem("role");
@@ -21,22 +21,16 @@ const Layout = () => {
 
     return (
         <div className="layout-container">
-            <header className="header">
-                <h1>Dashboard</h1>
-            </header>
-
-            {/* Dashboard menu */}
-            <div className="menu-container">
-                <div className="card-grid">
+            <header className="navbar">
+                <h1 className="navbar-brand">Dashboard</h1>
+                <nav className="navbar-menu">
                     {options.map((option, index) => (
-                        <div key={index} className="card">
-                            <Link to={option.path} className="card-link">
-                                <h2 className="card-title">{option.label}</h2>
-                            </Link>
-                        </div>
+                        <Link key={index} to={option.path} className="navbar-link">
+                            {option.label}
+                        </Link>
                     ))}
-                </div>
-            </div>
+                </nav>
+            </header>
 
             {/* Render specific page content */}
             <main className="content">

@@ -110,7 +110,7 @@ const QuestionnaireScreen = () => {
 
             {/* Show questionnaire list if not viewing a question form */}
             {!isQuestionnaireSelected && (
-                <div className="questionnaire-list">
+                <div className="questionnaire-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {loading ? (
                         <LoadingSpinner />
                     ) : (
@@ -119,7 +119,7 @@ const QuestionnaireScreen = () => {
                                 <h2 className="card-title">{q.title}</h2>
                                 <p>{q.description}</p>
                                 <button
-                                    className="start-btn"
+                                    className="start-btn w-full"
                                     onClick={() => fetchQuestions(q.questionnaire_id)}
                                 >
                                     Start Questionnaire
@@ -141,12 +141,15 @@ const QuestionnaireScreen = () => {
                         }}
                     >
                         {paginateQuestions(currentQuestionnaire).map((question) => (
-                            <div key={question.question_id} className="question-card">
+                            <div key={question.question_id} className="question-card w-full">
                                 <p className="question-text">{question.question_text}</p>
-                                <div className="options-container">
+                                <div className="options-container flex flex-wrap gap-4">
                                     {question.question_type === "multiple_choice" ? (
                                         question.options.map((option) => (
-                                            <label key={option.option_text} className="option-label">
+                                            <label
+                                                key={option.option_text}
+                                                className="option-label fancy-radio"
+                                            >
                                                 <input
                                                     type="radio"
                                                     name={`question_${question.question_id}`}
@@ -156,6 +159,7 @@ const QuestionnaireScreen = () => {
                                                     }
                                                     className="option-input"
                                                 />
+                                                <span className="radio-custom"></span>
                                                 {option.option_text}
                                             </label>
                                         ))
@@ -166,34 +170,34 @@ const QuestionnaireScreen = () => {
                                             onChange={(e) =>
                                                 handleAnswerChange(question.question_id, e.target.value)
                                             }
-                                            className="text-input"
+                                            className="text-input w-full"
                                         />
                                     )}
                                 </div>
                             </div>
                         ))}
-                        <div className="pagination-controls">
+                        <div className="pagination-controls flex justify-between w-full mt-6">
                             <button
                                 type="button"
                                 onClick={handlePrevPage}
-                                className="pagination-btn"
+                                className="pagination-btn w-1/4"
                                 disabled={currentPage === 1}
                             >
                                 Previous
                             </button>
-                            <span className="pagination-info">
+                            <span className="pagination-info text-center w-1/2">
                                 Page {currentPage}
                             </span>
                             <button
                                 type="button"
                                 onClick={handleNextPage}
-                                className="pagination-btn"
+                                className="pagination-btn w-1/4"
                                 disabled={currentPage === Math.ceil(currentQuestionnaire.length / questionsPerPage)}
                             >
                                 Next
                             </button>
                         </div>
-                        <button type="submit" className="submit-btn">
+                        <button type="submit" className="submit-btn w-full mt-6">
                             Submit Answers
                         </button>
                     </form>

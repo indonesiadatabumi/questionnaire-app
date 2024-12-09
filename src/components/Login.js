@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
-import "./style/Login.css"; // Assuming you have a separate CSS file for styling
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import "./style/Login.css"; // Your custom styles
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,18 +17,25 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.roleName);
 
+      toast.success("Login successful!", { position: "top-center", autoClose: 2000 });
+      toast("Login Success", {
+        type: 'success'
+      });
       if (data.role === "admin") navigate("/dashboard");
       else navigate("/dashboard");
     } catch (error) {
-      console.log(error);
-      alert("Login failed!");
+      toast("Login Failed", {
+        type: 'warning'
+      });
+      toast.error("Login failed. Please check your credentials.", { position: "top-center", autoClose: 3000 });
     }
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
-        <h1 className="login-title">Login</h1>
+        <h1 className="login-title">Welcome Back</h1>
+        <p className="login-subtitle">Sign in to continue</p>
         <div className="input-group">
           <input
             type="text"

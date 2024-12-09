@@ -68,93 +68,95 @@ const Results = () => {
         <div className="results-container">
             <h1 className="results-title">{role === "admin" ? "All User Results" : "Your Results"}</h1>
 
-            {/* Display MBTI Results */}
-            <section className="results-section">
-                <h2 className="section-title">MBTI Results</h2>
-
-                {/* Admin-specific controls */}
-                {role === "admin" && (
-                    <div className="search-container">
-                        <input
-                            type="text"
-                            placeholder="Search by username or type"
-                            value={search}
-                            onChange={handleSearchChange}
-                            className="search-input"
-                        />
-                    </div>
-                )}
-
-                {/* Display MBTI Results */}
-                <div className="results-list">
-                    {mbtiResults.length > 0 ? (
-                        <div className="card-container">
-                            {mbtiResults.map((res, idx) => (
-                                <div key={idx} className="result-card">
-                                    {role === "admin" && <strong>Username: </strong>} {res.username} <br />
-                                    <strong>Type: </strong> {res.type_name} <br />
-                                    <strong>Description: </strong> {res.description}
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <p>No MBTI results available.</p>
-                    )}
-                </div>
-
-                {/* Admin pagination */}
-                {role === "admin" && pagination.total > pagination.limit && (
-                    <div className="pagination-controls">
-                        <button
-                            onClick={() => handlePageChange(pagination.page - 1)}
-                            disabled={pagination.page === 1}
-                            className="pagination-btn"
-                        >
-                            Previous
-                        </button>
-                        <span className="pagination-info">
-                            Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
-                        </span>
-                        <button
-                            onClick={() => handlePageChange(pagination.page + 1)}
-                            disabled={pagination.page === Math.ceil(pagination.total / pagination.limit)}
-                            className="pagination-btn"
-                        >
-                            Next
-                        </button>
-                    </div>
-                )}
-            </section>
-
-            {/* Display Questionnaire Results (only for admin) */}
+            {/* Search Input (Above Results) */}
             {role === "admin" && (
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Search by username or type"
+                        value={search}
+                        onChange={handleSearchChange}
+                        className="search-input"
+                    />
+                </div>
+            )}
+
+            {/* Main container for results */}
+            <div className="results-main">
+                {/* Display MBTI Results */}
                 <section className="results-section">
-                    <h2 className="section-title">Questionnaire Results</h2>
+                    <h2 className="section-title">MBTI Results</h2>
 
                     <div className="results-list">
-                        {questionnaireResults.length > 0 ? (
+                        {mbtiResults.length > 0 ? (
                             <div className="card-container">
-                                {questionnaireResults.map((res, idx) => (
+                                {mbtiResults.map((res, idx) => (
                                     <div key={idx} className="result-card">
-                                        <strong>Questionnaire ID: </strong> {res.questionnaire_id} <br />
-                                        <strong>Analyzed At: </strong> {new Date(res.analyzed_at).toLocaleString()} <br />
-                                        <strong>Analysis Results:</strong>
-                                        <ul>
-                                            {res.analysis_results.map((result, resultIdx) => (
-                                                <li key={resultIdx} className="analysis-result">
-                                                    {result.option_text}: {result.count}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        {role === "admin" && <strong>Username: </strong>} {res.username} <br />
+                                        <strong>Type: </strong> {res.type_name} <br />
+                                        <strong>Description: </strong> {res.description}
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <p>No questionnaire results available.</p>
+                            <p>No MBTI results available.</p>
                         )}
                     </div>
+
+                    {/* Admin pagination */}
+                    {role === "admin" && pagination.total > pagination.limit && (
+                        <div className="pagination-controls">
+                            <button
+                                onClick={() => handlePageChange(pagination.page - 1)}
+                                disabled={pagination.page === 1}
+                                className="pagination-btn"
+                            >
+                                Previous
+                            </button>
+                            <span className="pagination-info">
+                                Page {pagination.page} of {Math.ceil(pagination.total / pagination.limit)}
+                            </span>
+                            <button
+                                onClick={() => handlePageChange(pagination.page + 1)}
+                                disabled={pagination.page === Math.ceil(pagination.total / pagination.limit)}
+                                className="pagination-btn"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
                 </section>
-            )}
+
+                {/* Admin: Display Questionnaire Results */}
+                {role === "admin" && (
+                    <section className="results-section">
+                        <h2 className="section-title">Questionnaire Results</h2>
+
+                        <div className="results-list">
+                            {questionnaireResults.length > 0 ? (
+                                <div className="card-container">
+                                    {questionnaireResults.map((res, idx) => (
+                                        <div key={idx} className="result-card">
+                                            <strong>Questionnaire ID: </strong> {res.questionnaire_id} <br />
+                                            <strong>Analyzed At: </strong> {new Date(res.analyzed_at).toLocaleString()} <br />
+                                            <strong>Analysis Results:</strong>
+                                            <ul>
+                                                {res.analysis_results.map((result, resultIdx) => (
+                                                    <li key={resultIdx} className="analysis-result">
+                                                        {result.option_text}: {result.count}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p>No questionnaire results available.</p>
+                            )}
+                        </div>
+                    </section>
+                )}
+            </div>
         </div>
     );
 };

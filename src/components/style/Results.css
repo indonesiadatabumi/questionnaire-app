@@ -1,123 +1,92 @@
-/* Container for the results page */
 .results-container {
-    padding: 20px;
-    background-color: #f9f9f9;
     font-family: Arial, sans-serif;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
-  /* Title for the results page */
-  .results-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  /* Section title */
-  .section-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 20px;
-  }
-  
-  /* Input for searching */
-  .search-container {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .search-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 60%;
-    margin-top: 10px;
+    padding: 2rem;
+    background: #f5f5f5;
+    width: 100%;
     box-sizing: border-box;
-  }
-  
-  .search-input:focus {
-    border-color: #007bff;
-  }
-  
-  /* List of results */
-  .results-list {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  .result-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .result-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .analysis-result {
-    font-size: 14px;
-    color: #555;
-    margin-left: 20px;
-  }
-  
-  /* Pagination */
-  .pagination-controls {
+}
+
+.results-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.search-container {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.results-main {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .pagination-btn {
-    padding: 8px 15px;
-    font-size: 14px;
+    gap: 2rem;
+}
+
+.results-section {
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.results-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.result-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-card strong {
+    font-weight: bold;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.pagination-btn {
+    padding: 0.6rem 1rem;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .pagination-btn:hover {
+}
+
+.pagination-btn:hover {
     background-color: #0056b3;
-  }
-  
-  .pagination-info {
-    font-size: 16px;
+}
+
+.pagination-info {
+    font-size: 1rem;
     color: #333;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .search-input {
-      width: 80%;
-    }
-  
-    .pagination-controls {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .pagination-btn {
-      margin-top: 10px;
-    }
-  }
-  
+}

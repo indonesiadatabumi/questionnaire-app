@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-import "./style/MBTIManage.css"; // Assuming you have a CSS file for styling
+import "./style/MBTIManage.css"; // Custom styles
 
 const MbtiManage = () => {
     const [questions, setQuestions] = useState([]);
@@ -18,61 +18,41 @@ const MbtiManage = () => {
         setQuestions(data);
     };
 
-    // Add a new MBTI question
-    const handleAddQuestion = async (e) => {
+    // Add or update question
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem("token");
         const payload = { question_text: questionText, dimension, direction };
 
         try {
-            await API.post("/mbti/questions", payload, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            alert("Question added successfully");
-            fetchQuestions(); // Re-fetch the questions
-            setQuestionText("");
-            setDimension("");
-            setDirection("positive");
+            if (questionIdToUpdate) {
+                await API.put(`/mbti/questions/${questionIdToUpdate}`, payload, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                alert("Question updated successfully");
+            } else {
+                await API.post("/mbti/questions", payload, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                alert("Question added successfully");
+            }
+            fetchQuestions();
+            resetForm();
         } catch (error) {
-            console.error("Error adding question:", error);
-            alert("Failed to add question");
+            console.error("Error saving question:", error);
+            alert("Failed to save question");
         }
     };
 
-    // Edit an existing MBTI question
-    const handleUpdateQuestion = async (e) => {
-        e.preventDefault();
-        if (!questionIdToUpdate) return;
-
-        const token = localStorage.getItem("token");
-        const payload = { question_text: questionText, dimension, direction };
-
-        try {
-            await API.put(`/mbti/questions/${questionIdToUpdate}`, payload, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            alert("Question updated successfully");
-            fetchQuestions(); // Re-fetch the questions
-            setQuestionText("");
-            setDimension("");
-            setDirection("positive");
-            setQuestionIdToUpdate(null); // Reset the state after update
-        } catch (error) {
-            console.error("Error updating question:", error);
-            alert("Failed to update question");
-        }
-    };
-
-    // Delete an MBTI question
+    // Delete question
     const handleDeleteQuestion = async (questionId) => {
         const token = localStorage.getItem("token");
-
         try {
             await API.delete(`/mbti/questions/${questionId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             alert("Question deleted successfully");
-            fetchQuestions(); // Re-fetch the questions
+            fetchQuestions();
         } catch (error) {
             console.error("Error deleting question:", error);
             alert("Failed to delete question");
@@ -87,6 +67,14 @@ const MbtiManage = () => {
         setQuestionIdToUpdate(question.question_id);
     };
 
+    // Reset form fields
+    const resetForm = () => {
+        setQuestionText("");
+        setDimension("");
+        setDirection("positive");
+        setQuestionIdToUpdate(null);
+    };
+
     useEffect(() => {
         fetchQuestions();
     }, []);
@@ -95,71 +83,84 @@ const MbtiManage = () => {
         <div className="mbti-manage-container">
             <h1 className="manage-title">Manage MBTI Questions</h1>
 
-            {/* Add or Update Question Form */}
-            <form onSubmit={questionIdToUpdate ? handleUpdateQuestion : handleAddQuestion} className="question-form">
-                <input
-                    type="text"
-                    placeholder="Question Text"
-                    value={questionText}
-                    onChange={(e) => setQuestionText(e.target.value)}
-                    required
-                    className="input-field"
-                />
-                <select
-                    value={dimension}
-                    onChange={(e) => setDimension(e.target.value)}
-                    className="select-field"
-                    required
-                >
-                    <option value="">Select Dimension</option>
-                    <option value="EI">EI</option>
-                    <option value="SN">SN</option>
-                    <option value="TF">TF</option>
-                    <option value="JP">JP</option>
-                </select>
-                <select
-                    value={direction}
-                    onChange={(e) => setDirection(e.target.value)}
-                    className="select-field"
-                    required
-                >
-                    <option value="positive">Positive</option>
-                    <option value="negative">Negative</option>
-                </select>
-
-                <button type="submit" className="submit-btn">
-                    {questionIdToUpdate ? "Update Question" : "Add Question"}
-                </button>
-            </form>
-
-            {/* List of MBTI Questions */}
-            <div className="question-list">
-                <h2>Existing Questions</h2>
-                {questions.length > 0 ? (
-                    <div className="card-container">
-                        {questions.map((q) => (
-                            <div key={q.question_id} className="card question-card">
-                                <p><strong>Question:</strong> {q.question_text}</p>
-                                <p><strong>Dimension:</strong> {q.dimension}</p>
-                                <p><strong>Direction:</strong> {q.direction}</p>
-                                <button
-                                    className="edit-btn"
-                                    onClick={() => handleEditQuestion(q)}
-                                >
-                                    Edit
+            <div className="manage-content">
+                {/* Form Section */}
+                <div className="form-container">
+                    <form onSubmit={handleFormSubmit} className="question-form">
+                        <h2>{questionIdToUpdate ? "Update Question" : "Add Question"}</h2>
+                        <input
+                            type="text"
+                            placeholder="Question Text"
+                            value={questionText}
+                            onChange={(e) => setQuestionText(e.target.value)}
+                            required
+                            className="input-field"
+                        />
+                        <select
+                            value={dimension}
+                            onChange={(e) => setDimension(e.target.value)}
+                            className="select-field"
+                            required
+                        >
+                            <option value="">Select Dimension</option>
+                            <option value="EI">EI</option>
+                            <option value="SN">SN</option>
+                            <option value="TF">TF</option>
+                            <option value="JP">JP</option>
+                        </select>
+                        <select
+                            value={direction}
+                            onChange={(e) => setDirection(e.target.value)}
+                            className="select-field"
+                            required
+                        >
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                        </select>
+                        <div className="form-actions">
+                            <button type="submit" className="submit-btn">
+                                {questionIdToUpdate ? "Update" : "Add"}
+                            </button>
+                            {questionIdToUpdate && (
+                                <button type="button" className="reset-btn" onClick={resetForm}>
+                                    Cancel
                                 </button>
-                                <button
-                                    className="delete-btn"
-                                    onClick={() => handleDeleteQuestion(q.question_id)}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p>No questions available</p>
-                )}
+                            )}
+                        </div>
+                    </form>
+                </div>
+
+                {/* Questions Grid Section */}
+                <div className="grid-container">
+                    <h2>Existing Questions</h2>
+                    {questions.length > 0 ? (
+                        <div className="card-grid">
+                            {questions.map((q) => (
+                                <div key={q.question_id} className="card question-card">
+                                    <p><strong>Question:</strong> {q.question_text}</p>
+                                    <p><strong>Dimension:</strong> {q.dimension}</p>
+                                    <p><strong>Direction:</strong> {q.direction}</p>
+                                    <div className="card-actions">
+                                        <button
+                                            className="edit-btn"
+                                            onClick={() => handleEditQuestion(q)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="delete-btn"
+                                            onClick={() => handleDeleteQuestion(q.question_id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>No questions available</p>
+                    )}
+                </div>
             </div>
         </div>
     );

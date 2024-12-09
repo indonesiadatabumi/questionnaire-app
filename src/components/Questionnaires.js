@@ -46,54 +46,61 @@ const Questionnaires = () => {
   return (
     <div className="questionnaires-container">
       <h1 className="page-title">Questionnaires</h1>
-      
-      {/* Add Questionnaire Form */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          addQuestionnaire();
-        }}
-        className="add-questionnaire-form"
-      >
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          className="input-field"
-        />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-          className="textarea-field"
-        />
-        <button type="submit" className="submit-btn">
-          Add Questionnaire
-        </button>
-      </form>
 
-      {/* List of Questionnaires */}
-      <div className="questionnaire-list">
-        {questionnaires.map((q) => (
-          <div key={q.questionnaire_id} className="card questionnaire-card">
-            <h3 className="card-title">{q.title}</h3>
-            <p className="card-description">{q.description}</p>
-            <div className="card-actions">
-              <button onClick={() => handleDetail(q.questionnaire_id)} className="action-btn">
-                View Questions
-              </button>
-              <button
-                onClick={() => deleteQuestionnaire(q.questionnaire_id)}
-                className="action-btn delete-btn"
-              >
-                Delete
-              </button>
+      {/* Main container for form and list */}
+      <div className="questionnaires-main">
+        
+        {/* Add Questionnaire Form (Left side) */}
+        <div className="form-container">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addQuestionnaire();
+            }}
+            className="add-questionnaire-form"
+          >
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="input-field"
+            />
+            <textarea
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              className="textarea-field"
+            />
+            <button type="submit" className="submit-btn">
+              Add Questionnaire
+            </button>
+          </form>
+        </div>
+
+        {/* List of Questionnaires (Right side) */}
+        <div className="questionnaire-list">
+          {questionnaires.map((q) => (
+            <div key={q.questionnaire_id} className="card questionnaire-card">
+              <h3 className="card-title">{q.title}</h3>
+              <p className="card-description">{q.description}</p>
+              <div className="card-actions">
+                <button onClick={() => handleDetail(q.questionnaire_id)} className="action-btn">
+                  View Questions
+                </button>
+                <button
+                  onClick={() => deleteQuestionnaire(q.questionnaire_id)}
+                  className="action-btn delete-btn"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
       </div>
     </div>
   );
