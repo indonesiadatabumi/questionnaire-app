@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const cors = require('cors');
@@ -6,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 20605;
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Allow requests from localhost
+  origin: `http://${process.env.HOST}:${process.env.PORT}`,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };

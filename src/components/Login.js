@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+// import { toast } from "react-toastify";
+// import 'react-toastify/dist/ReactToastify.css';
 import "./style/Login.css"; // Your custom styles
 
 const Login = () => {
@@ -17,17 +17,17 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.roleName);
 
-      toast.success("Login successful!", { position: "top-center", autoClose: 2000 });
-      toast("Login Success", {
-        type: 'success'
-      });
+      // toast.success("Login successful!", { position: "top-center", autoClose: 2000 });
+      // toast("Login Success", {
+      //   type: 'success'
+      // });
       if (data.role === "admin") navigate("/dashboard");
       else navigate("/dashboard");
     } catch (error) {
-      toast("Login Failed", {
-        type: 'warning'
-      });
-      toast.error("Login failed. Please check your credentials.", { position: "top-center", autoClose: 3000 });
+      // toast("Login Failed", {
+      //   type: 'warning'
+      // });
+      // toast.error("Login failed. Please check your credentials.", { position: "top-center", autoClose: 3000 });
     }
   };
 
